@@ -7,10 +7,11 @@
 		
     </head>
     <style>
-        text {
+        /* text {
             font: 10px sans-serif;
             pointer-events: none;
-}
+} */
+
     </style>
 	<body>
 		<script type="text/javascript">
@@ -20,18 +21,18 @@
 			var h = 300;
 
 			//Original data
-			var dataset = {
+			var graph = {
 				nodes: [
-                    { name: "A" },
-					{ name: "B" },
-					{ name: "C" },
-					{ name: "D" },
-					{ name: "E" },
-					{ name: "F" },
-					{ name: "G" },
-					{ name: "H" },
-					{ name: "I" },
-					{ name: "J" }
+                    { name: "0" }, 
+					{ name: "1" },
+					{ name: "2" },
+					{ name: "3" },
+					{ name: "4" },
+					{ name: "5" },
+					{ name: "6" },
+					{ name: "7" },
+					{ name: "8" },
+					{ name: "9" }
 				],
 				edges: [
 					{ source: 0, target: 1 },
@@ -50,44 +51,63 @@
 				]
 			};
 
-			//Initialize a simple force layout, using the nodes and edges in dataset
-			var force = d3.forceSimulation(dataset.nodes)
+			//Initialize a simple force layout, using the nodes and edges in graph
+			var force = d3.forceSimulation(graph.nodes)
 						  .force("charge", d3.forceManyBody())
-						  .force("link", d3.forceLink(dataset.edges))
+						  .force("link", d3.forceLink(graph.edges))
 						  .force("center", d3.forceCenter().x(w/2).y(h/2));
 
-			var colors = d3.scaleOrdinal(d3.schemeCategory10);
+            //use colors for the edges
+            var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
 			//Create SVG element
 			var svg = d3.select("body")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
-			
-			//Create edges as lines
+            //arrows
+                svg.append("defs").append("marker")
+                    .attr("id", "arrow")
+                    .attr("viewBox", "0 -5 10 10")
+                    .attr("refX", 23)
+                    .attr("refY", 0)
+                    .attr("markerWidth", 8)
+                    .attr("markerHeight", 8)
+                    .attr("orient", "auto")
+                .append("svg:path")
+                    .attr("d", "M0,-5L10,0L0,5")
+                    .style("stroke", "#ccc")
+                    .style("fill", "#ccc");
+            
+            //Create edges as lines
 			var edges = svg.selectAll("line")
-				.data(dataset.edges)
+				.data(graph.edges)
 				.enter()
 				.append("line")
-				.style("stroke", "#ccc")
-				.style("stroke-width", 1);
+				.style("stroke", function(d, i) {
+					return colors(i);
+				})
+                .style("stroke-width", 1)
+                .attr("marker-end", "url(#arrow)");
 			
 			//Create nodes as circles
 
             var nodes = svg.selectAll("circle")
-				.data(dataset.nodes)
+				.data(graph.nodes)
 				.enter()
 				.append("circle")
-				.attr("r", 10)
-				.style("fill", function(d, i) {
-					return colors(i);
-				});
+                .attr("r", 10)
+                .style("fill", '#ccc')
+				;
 
 
             let text = svg.selectAll('text')
-                    .data(dataset.nodes)
+                    .data(graph.nodes)
                     .enter()
                     .append('text')
+                    .style('font', '10px sans-serif');
+
+           
 
 			//Every time the simulation "ticks", this will be called
 			force.on("tick", function() {
@@ -104,7 +124,30 @@
                     .attr("dy", function(d) { return d.y; })
                     .text( function (d) { return d.name; })
                 
-			});
+            });
+            
+            svg.append('svg:defs').append('svg:marker')
+    .attr('id', 'end-arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', 6)
+    .attr('markerWidth', 3)
+    .attr('markerHeight', 3)
+    .attr('orient', 'auto')
+  .append('svg:path')
+    .attr('d', 'M0,-5L10,0L0,5')
+    .attr('fill', '#000');
+
+    svg.append('svg:defs').append('svg:marker')
+    .attr('id', 'start-arrow')
+    .attr('viewBox', '0 -5 10 10')
+    .attr('refX', 4)
+    .attr('markerWidth', 3)
+    .attr('markerHeight', 3)
+    .attr('orient', 'auto')
+  .append('svg:path')
+    .attr('d', 'M10,-5L0,0L10,5')
+    .attr('fill', '#000');
+
 
 		</script>
 	</body>
