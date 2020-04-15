@@ -17,11 +17,11 @@
 		<script type="text/javascript">
 
 			//Width and height
-			var w = 500;
-			var h = 300;
+			let w = 500;
+			let h = 300;
 
 			//Original data
-			var graph = {
+			let graph = {
 				nodes: [
                     { name: "0" }, 
 					{ name: "1" },
@@ -52,53 +52,79 @@
 			};
 
 			//Initialize a simple force layout, using the nodes and edges in graph
-			var force = d3.forceSimulation(graph.nodes)
+			let force = d3.forceSimulation(graph.nodes)
 						  .force("charge", d3.forceManyBody())
 						  .force("link", d3.forceLink(graph.edges))
 						  .force("center", d3.forceCenter().x(w/2).y(h/2));
 
             //use colors for the edges
-            var colors = d3.scaleOrdinal(d3.schemeCategory10);
+            let colors = d3.scaleOrdinal(d3.schemeCategory10);
 
 			//Create SVG element
-			var svg = d3.select("body")
+			let svg = d3.select("body")
 						.append("svg")
 						.attr("width", w)
 						.attr("height", h);
             //arrows
-                svg.append("defs").append("marker")
-                    .attr("id", "arrow")
-                    .attr("viewBox", "0 -5 10 10")
-                    .attr("refX", 23)
-                    .attr("refY", 0)
-                    .attr("markerWidth", 8)
-                    .attr("markerHeight", 8)
-                    .attr("orient", "auto")
-                .append("svg:path")
-                    .attr("d", "M0,-5L10,0L0,5")
-                    .style("stroke", "#ccc")
-                    .style("fill", "#ccc");
+     
+            let arrows = svg.append("defs")
+                .selectAll(".arrows")
+                .data(graph.edges)
+                .enter()
+            .append("marker") 
+            .attr("id", function(d,i){
+                return 'arrow' + i; //<-- append index postion
+                })
+            .attr('viewBox', '0 -5 10 10')
+            .attr('refX', 20)
+            .attr('refY',0)
+            .attr('markerWidth', 8)
+            .attr('markerHeight', 8)         
+            .attr('orient', 'auto')
+            .append('svg:path')
+                .attr('d', 'M0,-5L10,0L0,5')
+                .style("fill", function(d, i) {
+					return colors(i) ;
+				})    
+            
+            // let arrows = svg.append("defs").append("marker")
+            //         .attr("id", "arrow")
+            //         .attr("viewBox", "0 -5 10 10")
+            //         .attr("refX", 20)
+            //         .attr("refY", 0)
+            //         .attr("markerWidth", 8)
+            //         .attr("markerHeight", 8)
+            //         .attr("orient", "auto")
+            //     .append("svg:path")
+            //         .attr("d", "M0,-5L10,0L0,5");
             
             //Create edges as lines
-			var edges = svg.selectAll("line")
+			let edges = svg.selectAll("line")
 				.data(graph.edges)
 				.enter()
 				.append("line")
-				.style("stroke", function(d, i) {
+                .style("stroke", function(d, i) {
 					return colors(i);
 				})
                 .style("stroke-width", 1)
-                .attr("marker-end", "url(#arrow)");
+                .attr('marker-end', function(d,i){
+                    return "url(#arrow"+i+")";});
+
+                // .style("marker-end", "url(#arrow)");
 			
 			//Create nodes as circles
 
-            var nodes = svg.selectAll("circle")
+            let nodes = svg.selectAll("circle")
 				.data(graph.nodes)
 				.enter()
 				.append("circle")
                 .attr("r", 10)
-                .style("fill", '#ccc')
-				;
+                .style("fill", function(d,i) {
+                    if (d.name === "0") { 
+                        return '#7CFC00' }
+                     else {return   '#ccc'}
+                })
+                ;
 
 
             let text = svg.selectAll('text')
@@ -125,29 +151,6 @@
                     .text( function (d) { return d.name; })
                 
             });
-            
-            svg.append('svg:defs').append('svg:marker')
-    .attr('id', 'end-arrow')
-    .attr('viewBox', '0 -5 10 10')
-    .attr('refX', 6)
-    .attr('markerWidth', 3)
-    .attr('markerHeight', 3)
-    .attr('orient', 'auto')
-  .append('svg:path')
-    .attr('d', 'M0,-5L10,0L0,5')
-    .attr('fill', '#000');
-
-    svg.append('svg:defs').append('svg:marker')
-    .attr('id', 'start-arrow')
-    .attr('viewBox', '0 -5 10 10')
-    .attr('refX', 4)
-    .attr('markerWidth', 3)
-    .attr('markerHeight', 3)
-    .attr('orient', 'auto')
-  .append('svg:path')
-    .attr('d', 'M10,-5L0,0L10,5')
-    .attr('fill', '#000');
-
 
 		</script>
 	</body>
