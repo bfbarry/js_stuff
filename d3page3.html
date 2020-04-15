@@ -23,31 +23,32 @@
 			//Original data
 			let graph = {
 				nodes: [
-                    { name: "0" }, 
-					{ name: "1" },
-					{ name: "2" },
-					{ name: "3" },
-					{ name: "4" },
-					{ name: "5" },
-					{ name: "6" },
-					{ name: "7" },
-					{ name: "8" },
-					{ name: "9" }
+                    { name: "COGS 118A" }, //0
+					{ name: "COGS 18" }, //1
+					{ name: "CSE 8B" }, //2
+					{ name: "CSE11" }, //3
+					{ name: "MATH 18" }, //4
+					{ name: "MATH 20E" }, //5
+					{ name: "MATH 20C" }, //6
+					{ name: "MATH 20B" }, //7
+					{ name: "MATH 20A", }, //8
+                    { name: "MATH 180A" }, //9
+                    { name: "COGS 108", }, //10
+                    { name: "COGS 109", } //11
 				],
 				edges: [
-					{ source: 0, target: 1 },
-					{ source: 0, target: 2 },
-					{ source: 0, target: 3 },
-					{ source: 0, target: 4 },
-					{ source: 1, target: 5 },
-					{ source: 2, target: 5 },
-					{ source: 2, target: 5 },
-					{ source: 3, target: 4 },
-					{ source: 5, target: 8 },
-					{ source: 5, target: 9 },
-					{ source: 6, target: 7 },
-					{ source: 7, target: 8 },
-					{ source: 8, target: 9 }
+					{ source: 1, target: 0, group : 1},
+					{ source: 2, target: 0, group : 1},
+					{ source: 3, target: 0, group : 1},
+					{ source: 5, target: 0, group : 0},
+					{ source: 6, target: 5, group : 0},
+					{ source: 7, target: 6, group : 0},
+					{ source: 8, target: 7, group : 0},
+					{ source: 6, target: 9, group : 0},
+					{ source: 4, target: 5, group : 0},
+                    { source: 10, target: 0, group : 2 },
+                    { source: 11, target: 0, group : 2 },
+                    { source: 9, target: 0, group : 0 }
 				]
 			};
 
@@ -84,19 +85,11 @@
             .append('svg:path')
                 .attr('d', 'M0,-5L10,0L0,5')
                 .style("fill", function(d, i) {
-					return colors(i) ;
-				})    
-            
-            // let arrows = svg.append("defs").append("marker")
-            //         .attr("id", "arrow")
-            //         .attr("viewBox", "0 -5 10 10")
-            //         .attr("refX", 20)
-            //         .attr("refY", 0)
-            //         .attr("markerWidth", 8)
-            //         .attr("markerHeight", 8)
-            //         .attr("orient", "auto")
-            //     .append("svg:path")
-            //         .attr("d", "M0,-5L10,0L0,5");
+					if (d.group == 0){
+                     return '#000'}
+                    else {
+                        return colors(d.group)};
+				});    
             
             //Create edges as lines
 			let edges = svg.selectAll("line")
@@ -104,13 +97,14 @@
 				.enter()
 				.append("line")
                 .style("stroke", function(d, i) {
-					return colors(i);
+					if (d.group == 0){
+                     return '#000'}
+                    else {
+                        return colors(d.group)};
 				})
                 .style("stroke-width", 1)
                 .attr('marker-end', function(d,i){
                     return "url(#arrow"+i+")";});
-
-                // .style("marker-end", "url(#arrow)");
 			
 			//Create nodes as circles
 
@@ -118,22 +112,18 @@
 				.data(graph.nodes)
 				.enter()
 				.append("circle")
-                .attr("r", 10)
+                .attr("r", 7.5)
                 .style("fill", function(d,i) {
-                    if (d.name === "0") { 
+                    if (i === 0) { 
                         return '#7CFC00' }
                      else {return   '#ccc'}
-                })
-                ;
-
+                });
 
             let text = svg.selectAll('text')
                     .data(graph.nodes)
                     .enter()
                     .append('text')
-                    .style('font', '10px sans-serif');
-
-           
+                    .style('font', '7px arial');
 
 			//Every time the simulation "ticks", this will be called
 			force.on("tick", function() {
