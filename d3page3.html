@@ -136,7 +136,36 @@
                     .enter()
                     .append('text')
                     .style('font', '10px arial');
+            
+        //drag 
+            let drag_handler = d3.drag()
+                .on("start", drag_start)
+                .on("drag", drag_drag)
+                .on("end", drag_end);	
+                
+            //same as using .call on the node variable as in https://bl.ocks.org/mbostock/4062045 
+            drag_handler(nodes)
 
+            //drag handler
+            //d is the node 
+            function drag_start(d) {
+            if (!d3.event.active) force.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+            }
+
+            function drag_drag(d) {
+            d.fx = d3.event.x;
+            d.fy = d3.event.y;
+            }
+
+
+            function drag_end(d) {
+            if (!d3.event.active) force.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+            }
+            
 			//Every time the simulation "ticks", this will be called
 			force.on("tick", function() {
 
