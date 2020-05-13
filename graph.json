@@ -1,47 +1,31 @@
 {
   "nodes": [
-    {
-      "name": "Peter",
-      "label": "Person",
-      "id": 1
-    },
-    {
-      "name": "Michael",
-      "label": "Person",
-      "id": 2
-    },
-    {
-      "name": "Neo4j",
-      "label": "Database",
-      "id": 3
-    },
-    {
-      "name": "Graph Database",
-      "label": "Database",
-      "id": 4
-    }
+    { "course": "COGS 118A" }, 
+    { "course": "COGS 18" }, 
+    { "course": "CSE 8B" }, 
+    { "course": "CSE 11" }, 
+    { "course": "MATH 18" }, 
+    { "course": "MATH 20E" }, 
+    { "course": "MATH 20C" }, 
+    { "course": "MATH 20B" }, 
+    { "course": "MATH 20A" }, 
+    { "course": "MATH 180A" }, 
+    { "course": "COGS 108" }, 
+    { "course": "COGS 109" } 
   ],
-  "links": [
-    {
-      "source": 1,
-      "target": 2,
-      "type": "KNOWS",
-      "since": 2010
-    },
-    {
-      "source": 1,
-      "target": 3,
-      "type": "FOUNDED"
-    },
-    {
-      "source": 2,
-      "target": 3,
-      "type": "WORKS_ON"
-    },
-    {
-      "source": 3,
-      "target": 4,
-      "type": "IS_A"
-    }
+  
+  "edges": [
+    { "source": "COGS 18", "target": "COGS 118A", "group" : 1},
+    { "source": "CSE 8B", "target": "COGS 118A", "group" : 1},
+    { "source": "CSE 11", "target": "COGS 118A", "group" : 1},
+    { "source": "MATH 20E", "target": "COGS 118A", "group" : 0},
+    { "source": "MATH 20C", "target": "MATH 20E", "group" : 0},
+    { "source": "MATH 20B", "target": "MATH 20C", "group" : 0},
+    { "source": "MATH 20A", "target": "MATH 20B", "group" : 0},
+    { "source": "MATH 20C", "target": "MATH 180A", "group" : 0},
+    { "source": "MATH 18", "target": "MATH 20E", "group" : 0},
+    { "source": "COGS 108", "target": "COGS 118A", "group" : 2 },
+    { "source": "COGS 109", "target": "COGS 118A", "group" : 2 },
+    { "source": "MATH 180A", "target": "COGS 118A", "group" : 0 }
   ]
 }

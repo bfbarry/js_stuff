@@ -3,54 +3,42 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Major Map D3 Force Directed Graph</title>
-		<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
-		
+        <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     </head>
     <style>
         /* text {
             font: 10px sans-serif;
             pointer-events: none;
-} */
+        } */
+        div.tooltip {	
+            position: absolute;			
+            text-align: center;			
+            /* width: 70px;					
+            height: 28px;					 */
+            padding: 2px;				
+            font: 12px sans-serif;		
+            background: lightsteelblue;	
+            border: 0px;		
+            border-radius: 8px;			
+            pointer-events: none;			
+        }
 
     </style>
 	<body>
 		<script type="text/javascript">
+            "use strict";
 
 			//Width and height
 			let w = 750;
 			let h = 700;
 
-			//Original data
-			let graph = {
-				"nodes": [
-                    { "course": "COGS 118A" }, //0
-					{ "course": "COGS 18" }, //1
-					{ "course": "CSE 8B" }, //2
-					{ "course": "CSE 11" }, //3
-					{ "course": "MATH 18" }, //4
-					{ "course": "MATH 20E" }, //5
-					{ "course": "MATH 20C" }, //6
-					{ "course": "MATH 20B" }, //7
-					{ "course": "MATH 20A", }, //8
-                    { "course": "MATH 180A" }, //9
-                    { "course": "COGS 108", }, //10
-                    { "course": "COGS 109", } //11
-				],
-				"edges": [
-					{ "source": "COGS 18", "target": "COGS 118A", "group" : 1},
-					{ "source": "CSE 8B", "target": "COGS 118A", "group" : 1},
-					{ "source": "CSE 11", "target": "COGS 118A", "group" : 1},
-					{ "source": "MATH 20E", "target": "COGS 118A", "group" : 0},
-					{ "source": "MATH 20C", "target": "MATH 20E", "group" : 0},
-					{ "source": "MATH 20B", "target": "MATH 20C", "group" : 0},
-					{ "source": "MATH 20A", "target": "MATH 20B", "group" : 0},
-					{ "source": "MATH 20C", "target": "MATH 180A", "group" : 0},
-					{ "source": "MATH 18", "target": "MATH 20E", "group" : 0},
-                    { "source": "COGS 108", "target": "COGS 118A", "group" : 2 },
-                    { "source": "COGS 109", "target": "COGS 118A", "group" : 2 },
-                    { "source": "MATH 180A", "target": "COGS 118A", "group" : 0 }
-				]
-			};
+            
+            fetch("./graph1.json")
+                .then(function(resp) {
+                    return resp.json();
+                })
+                .then(function(graph){
 
 			//Initialize a simple force layout, using the nodes and edges in graph
 			let force = d3.forceSimulation(graph.nodes)
@@ -83,10 +71,10 @@
                 return 'arrow' + i; //<-- append index postion
                 })
             .attr('viewBox', '0 -5 10 10')
-            .attr('refX', 23.2)
+            .attr('refX', 27.6)
             .attr('refY',0)
-            .attr('markerWidth', 8)
-            .attr('markerHeight', 8)         
+            .attr('markerWidth', 7)
+            .attr('markerHeight', 6)         
             .attr('orient', 'auto')
             .append('svg:path')
                 .attr('d', 'M0,-5L10,0L0,5')
@@ -111,7 +99,12 @@
                 .style("stroke-width", 2)
                 .attr('marker-end', function(d,i){
                     return "url(#arrow"+i+")";});
-			
+            
+            //Create tooltips to display name on mouseover
+            let div = d3.select("body").append("div")	
+                .attr("class", "tooltip")				
+                .style("opacity", 0);   
+
 			//Create nodes as circles
 
             let nodes = svg.selectAll("circle")
@@ -120,24 +113,86 @@
 				.append("circle")
                 .attr("r", 20)
                 .attr("stroke", function(d,i) {
-                    if (i === 0) { 
+                    if (d.type === "parent") { 
                         return '#dbffdf' }
+                    else if (d.type === "special") {
+                        return '#e3feff'
+                    }
                      else {return   '#f2f7f7'}
                 })
                 .style("stroke-width", 5)
                 .style("fill", function(d,i) {
-                    if (i === 0) { 
+                    if (d.type === "parent") { 
                         return '#7CFC00' }
+                    else if (d.type === "special") {
+                        return '#1cf7ff'
+                    }
                      else {return   '#ccc'}
+                })
+                .on("mouseover", function(d) {		
+                    div.transition()		
+                        .duration(200)		
+                        .style("opacity", .9);	
+                    div	.html(d.name)	
+                        .style("left", (d3.event.pageX + 5) + "px")		
+                        .style("top", (d3.event.pageY - 25) + "px");	
+                    })					
+                .on("mouseout", function(d) {		
+                    div.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
                 });
+               
+            //create description boxes upon click
+            let tip; 
 
+            nodes.on("click", function (d){
+                //d3.event.preventDefault()
+                if (tip){ tip.remove()};
+
+                tip = svg.append("g")
+                .attr("id", "tip")
+                .attr("transform", "translate(" + (d3.event.pageX + 7)  + "," + (d3.event.pageY + 7) + ")");
+
+                let rect = tip.append("rect")
+                .style("fill", "white")
+                .style("stroke", "steelblue");
+
+                tip.append("text")
+                .text(d.description)
+                .attr("dy", "1em")
+                .attr("x", 5);
+
+                let bbox = tip.node().getBBox();
+
+                rect.attr("width", bbox.width + 5)
+                    .attr("height", bbox.height)
+
+            });
+
+            //close box upon click on body
+
+            $(document).mouseup(function(e) 
+                {
+                    var container = $("g");
+
+                    // if the target of the click isn't the container nor a descendant of the container
+                    if (!container.is(e.target) && container.has(e.target).length === 0) 
+                    {
+                        container.hide();
+                    }
+                });
+            
+            //text on nodes
             let text = svg.selectAll('text')
                     .data(graph.nodes)
                     .enter()
                     .append('text')
-                    .style('font', '10px arial');
+                    .style('font', '10px arial')
+                    .attr("pointer-events", "none")
+                    .attr("text-anchor", "middle");
             
-        //drag 
+            //drag 
             let drag_handler = d3.drag()
                 .on("start", drag_start)
                 .on("drag", drag_drag)
@@ -159,7 +214,6 @@
             d.fy = d3.event.y;
             }
 
-
             function drag_end(d) {
             if (!d3.event.active) force.alphaTarget(0);
             d.fx = null;
@@ -177,12 +231,13 @@
 				nodes.attr("cx", function(d) { return d.x; })
                      .attr("cy", function(d) { return d.y; });
                      
-                text.attr("x", function(d) { return d.x - 20; })
-                    .attr("dy", function(d) { return d.y +3 ; })
-                    .text( function (d) { return d.course; })
+                text.attr("x", function(d) { return d.x; })
+                    .attr("dy", function(d) { return d.y+3; })
+                    .text( function (d) { return d.course; });
                 
             });
 
+        })
 		</script>
 	</body>
 </html>
