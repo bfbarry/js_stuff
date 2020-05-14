@@ -24,6 +24,11 @@
             pointer-events: none;			
         }
 
+        g.tooltip2 {
+            padding: 2px;				
+            font: 12px sans-serif;				
+        }
+
     </style>
 	<body>
 		<script type="text/javascript">
@@ -33,7 +38,6 @@
 			let w = 750;
 			let h = 700;
 
-            
             fetch("./graph1.json")
                 .then(function(resp) {
                     return resp.json();
@@ -49,8 +53,6 @@
                                 // })
                                 .distance(90))
                           .force("center", d3.forceCenter().x(w/2).y(h/2));
-            
-          
                    
             //use colors for the edges
             let colors = d3.scaleOrdinal(d3.schemeCategory10);
@@ -61,7 +63,7 @@
 						.attr("width", w)
                         .attr("height", h);
                         
-            //arrows
+            //arrow tips
             let arrows = svg.append("defs")
                 .selectAll(".arrows")
                 .data(graph.edges)
@@ -144,24 +146,29 @@
                 });
                
             //create description boxes upon click
+            
             let tip; 
 
             nodes.on("click", function (d){
-                //d3.event.preventDefault()
                 if (tip){ tip.remove()};
 
                 tip = svg.append("g")
-                .attr("id", "tip")
-                .attr("transform", "translate(" + (d3.event.pageX + 7)  + "," + (d3.event.pageY + 7) + ")");
+                .attr("class", "tooltip2")				
+                // .attr("id", "tip")
+                tip.attr("transform", "translate(" + (d3.event.pageX + 7)  + "," + (d3.event.pageY + 7) + ")");
 
-                let rect = tip.append("rect")
-                .style("fill", "white")
-                .style("stroke", "steelblue");
+                let rect = tip.append("rect").transition().duration(200)
+                .attr("rx", 6)
+                .attr("ry", 6)
+                .style("fill", "lightsteelblue")
+                .style("stroke", "steelblue")
+                .style("opacity", .9);
 
                 tip.append("text")
                 .text(d.description)
                 .attr("dy", "1em")
-                .attr("x", 5);
+                .attr("x", 5)
+                .call(wrap, 250);
 
                 let bbox = tip.node().getBBox();
 
@@ -169,7 +176,7 @@
                     .attr("height", bbox.height)
 
             });
-
+            
             //close box upon click on body
 
             $(document).mouseup(function(e) 
@@ -237,6 +244,30 @@
                 
             });
 
+            //This is to wrap text in description boxes
+            function wrap(text, width) {
+                text.each(function() {
+                    var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    y = text.attr("y"),
+                    dy = parseFloat(text.attr("dy")),
+                    tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+                    while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", lineHeight + "em").text(word);
+                        }
+                    }
+                });
+            }
         })
 		</script>
 	</body>
