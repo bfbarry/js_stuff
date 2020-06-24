@@ -1,6 +1,6 @@
 {
   "nodes": [
-    { "course": "COGS 118A", "name":"Introduction to Machine Learning", "description":"Amazing class! Lorem ipsum dorset bla bla bla bla bla bla bla","type": "parent"}, 
+    { "course": "COGS 118A", "name":"Introduction to Machine Learning", "description":"<b> Amazing class! <b> <br>Lorem ipsum dorset bla bla bla bla bla bla bla","type": "parent"}, 
     { "course": "COGS 18", "name":"Intro to python","description":"","type": "child"}, 
     { "course": "CSE 8B", "name":"","description":"","type": "child"}, 
     { "course": "CSE 11", "name":"","description":"","type": "child"}, 
