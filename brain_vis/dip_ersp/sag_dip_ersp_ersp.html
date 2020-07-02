@@ -7,6 +7,19 @@
    
 </head>
 <style>
+    a {
+        font-family: 'Verdana', Geneva, sans-serif;
+        font-size:50px;
+        color: white;
+        padding: 0px 25px;
+    }
+
+    .nav {
+        position: absolute;
+        width: 4000px;
+        z-index: 99;
+    }
+
     .body {
         position: absolute;
     }
@@ -26,68 +39,68 @@
    
     #cl3 {
     position: absolute;
-    top: 1178px;
-    left: 1035px;
+    top: 1250px;
+    left: 670px;
+    z-index: 1;
     }
     #cl4 {
     position: absolute;
-    top: 2075px;
-    left: 600px;
+    top: 1495px;
+    left: 1286px;
     z-index: 1;
     }
     #cl5 {
     position: absolute;
-    top: 1600px;
-    left: 1300px;
+    top: 847px;
+    left: 703px;
     z-index: 1;
     }
     #cl6 {
     position: absolute;
-    top: 1450px;
-    left: 700px;
-    z-index: 1;
+    top: 1840px;
+    left: 2199px;
     }
     #cl7 {
     position: absolute;
-    top: 1950px;
-    left: 1000px;
+    top: 825px;
+    left: 1592px;
     }
     #cl8 {
     position: absolute;
-    top: 1425px;
-    left: 1800px;
+    top: 1337px;
+    left: 2251px;
+    z-index: 1;
     }
     #cl9 {
     position: absolute;
-    top: 650px;
-    left: 550px;
+    top: 630px;
+    left: 740px;
     }
     #cl10 {
     position: absolute;
-    top: 825px;
-    left: 550px;
+    top: 593px;
+    left: 1568px;
+    z-index: 1;
     }
     #cl11 {
     position: absolute;
-    top: 2075px;
-    left: 1600px;
-    z-index: 1;
+    top: 1943px;
+    left: 1143px;
     }
     #cl12 {
     position: absolute;
-    top: 1200px;
-    left: 450px;
+    top: 1143px;
+    left: 1646px;
     }
     #cl13 {
     position: absolute;
-    top: 1890px;
-    left: 1650px;
+    top: 1305px;
+    left: 1437px;
     }
     #cl14 {
     position: absolute;
-    top: 546px;
-    left: 1343px;
-    z-index: 1;
+    top: 1047px;
+    left: 2647px;
     }
 
     .textbox {
@@ -102,49 +115,81 @@
 </style>
 
 <body class = "body" style="background-color:black;" >
+
+    <div class = "nav">
+        <a href = "horz_dip_ersp.html">Horizontal ERP</a>
+        <a href = "sag_dip_ersp.html">Sagittal ERP</a> 
+        <a href = "cor_dip_ersp.html">Coronal ERP</a>  <br>
+        <a href = "horz_dip_ersp_ersp.html">Horizontal ERSP</a>
+        <a href = "sag_dip_ersp_ersp.html">Sagittal ERSP</a> 
+        <a href = "cor_dip_ersp_ersp.html">Coronal ERSP</a> <br>
+        <a href = "../dip_only/horz_dip_only.html">[Switch clusterings]</a> <br>
+    </div>
     <!-- <svg id "graph"></svg> -->
 
 
-    <img class = "background" src="../img/c_brain_slice.png">
+    <img class = "background" src="../img/s_brain_slice.png">
 
     <div id = 'graph'></div>
 
     <img id ='cl3' src="../img/dip_ersp/ersp3.png" />
-    <div class = 'textbox' id = 'div3' style = "display: none;"> <b>B3: TP+ (time and amp |P| > |T|) LR- Biphasic</b> <br> 
-        ERP: Biphasic (negative/positive). Press: has a larger negative trough before tap; 
-        Tap: smaller initial negative, not preceding tap, shifted later in time (but this pattern appears often and may be due to tap/press parameters). <br>
-        
-        Downward slope before 0.
-    </div>
-
-    <img id="cl4" src="../img/dip_ersp/ersp4.png" />
-    <div class = 'textbox' id = 'div4' style = "display: none;"> <b>B4: TP+ (time) LR- (Trough, PR Biphasic) Mirror: B11</b>
+    <div class = 'textbox' id = 'div3' style = "display: none;"> <b>B3: TP+ (time) LR- (Trough, PR Biphasic) Mirror: B11</b>
         Mainly a negative peak at ~200 ms (Press right has a earlier positive peak before press. It would be useful to check variance to see if stat significant.)  The shift b/w two bottom peaks (tap and press right) could be due to latency.<br>
         
         Right troughs slightly lower than left.
     </div>
 
-    <img id="cl5" src="../img/dip_ersp/ersp5.png" />
-    <div class = 'textbox' id = 'div5' style = "display: none;"> <b>B5: TP+ (time) LR+ (amp L>R), Biphasic, Mirror: B6</b>
+    <img id="cl4" src="../img/dip_ersp/ersp4.png" />
+    <div class = 'textbox' id = 'div4' style = "display: none;"> <b>B4: TP+ (time) LR+ (amp L>R), Biphasic, Mirror: B6</b>
         ERP: Biphasic (posive/negative). <br>
         Press: broader positive peak, smaller negative <br>
         Tap: sharp positive/negative peaks.  In both, Left is higher.
-       <br>  Overall a lot of similarity b/w Ziyi's 8 and 9, and Shannon's 3 and 11 (and see which B matches those). Would be useful to look at individual IC, and topoplot for all 3 + 2 clusterings (Brian (1), Ziyi (2), Shannon (2)). <br>
-       (Better ERP match with Z8 & S3 ?).  </div>
+       <br>  More comments from other clustering.
+    </div>
+
+    <img id="cl5" src="../img/dip_ersp/ersp5.png" />
+    <div class = 'textbox' id = 'div5' style = "display: none;">
+        <b>B11: TP+ (time and amp), LR-, large trough, high oscillation, Mirror: B4</b><br>
+        P/T difference, especially @ t=0.<br>
+        
+        Left slightly above right especially for tap.<br>
+        Would be useful to use same vertical scale for all plots (to compare w/ B4's ERP).<br>
+        
+        Dipoles mirror B3.   </div>
 
     <img id="cl6" src="../img/dip_ersp/ersp6.png" />
-    <div class = 'textbox' id = 'div6' style = "display: none;"><b>B6: TP+ (time) LR+ (only for press; amp, R>L), biphasic, Mirror: B5</b>
-        Maybe Z11 is similar with its dipoles. <br>
+    <div class = 'textbox' id = 'div6' style = "display: none;"><b>B6: TP+ (time) LR+ (amp L>R), biphasic</b><br>
+        Synchronous for most part; tap slightly later.  PL broader start and early response.<br>
         
-        Press: Has broader peak  <br>
-        Tap: not much L/R difference<br>
-           - Some difference right after 0 but synchronizes again
-        Slight L/R distinction overall<br>
+        Downard slope before 0.<br>
         
-        L/R mirror of B5? (although peaks higher)</div>
+        Left slightly above right.<br>
+        Could shift time scale to line them up; investigate ERP plot separately. (notes on journal)</div>
 
     <img id="cl7" src="../img/dip_ersp/ersp7.png" />
-    <div class = 'textbox' id = 'div7' style = "display: none;"> <b>**B7: TP+(amp; pre t=0) LR-, biphasic</b><br>
+    <div class = 'textbox' id = 'div7' style = "display: none;"> 
+        <b>B7: TP+(time) LR+ (amp L>R), Biphasic emphasis on peak</b><br>
+
+        LR diff: left seems to oscillate w/ higher amp<br>
+        ERP could be a L/R mirror of B6.<br>
+        
+        Very similar to B5 (except t=0)?<br>
+        
+        RIght amplitude < left
+        </div>
+    
+    <img id="cl8" src="../img/dip_ersp/ersp8.png" />
+    <b>B14: PT+ (time) LR + (amp |L| >>> |R|), biphasic</b><br>
+        Left preference (troughs first, but before t=0 which is interesting).<br><br>
+        
+        Tap left slightly above at ~100ms<br>
+        Most of press left before peak press occurs.<br><br>
+        
+        Ziyi's not similar
+    <div class = 'textbox' id = 'div8' style = "display: none;"></div>
+
+    <img id="cl9" src="../img/dip_ersp/ersp9.png" />
+    <div class = 'textbox' id = 'div9' style = "display: none;"><b>**B9: TP+(amp; pre t=0) LR-, biphasic</b><br>
         Not as much of a TP time difference compared to others.<br>
         Mostly press vs tap difference.  Tap slightly below.<br>
         
@@ -154,49 +199,38 @@
         
         Press & Tap difference in the amplitude of the positive peak
         </div>
-    
-    <img id="cl8" src="../img/dip_ersp/ersp8.png" />
-    <div class = 'textbox' id = 'div8' style = "display: none;"><b>B8: TP+(time) LR+ (amp L>R), Biphasic emphasis on peak</b><br>
-
-        LR diff: left seems to oscillate w/ higher amp<br>
-        ERP could be a L/R mirror of B6.<br>
-        
-        Very similar to B5 (except t=0)?<br>
-        
-        RIght amplitude < left</div>
-
-    <img id="cl9" src="../img/dip_ersp/ersp9.png" />
-    <div class = 'textbox' id = 'div9' style = "display: none;"><b>B9: TP+ (amp and time(?)) LR+ (For tap, in time pre t=0, then amp), multiphasic/chaotic (peak trough peak for tap)</b><br>
-
-        Tap left before TR around 0.  Also Tap's strong activity before 0 is interesting.<br>
-        
-        Mostly T/P difference, where tap peaks first (while p troughs). (polarity inversion); amp inverted <br>
-        Left slightly above right after t=0<br>
-        Tap left also peaks slightly before tap right before t=0
-        </div>
 
     <img id="cl10" src="../img/dip_ersp/ersp10.png" />
-    <div class = 'textbox' id = 'div10' style = "display: none;"><b>B10: TP+ (time) LR+ (amp L>R), biphasic</b><br>
-        Synchronous for most part; tap slightly later.  PL broader start and early response.<br>
+    <div class = 'textbox' id = 'div10' style = "display: none;"><b>B10: TP+ (time) LR+ (only for press; amp, R>L), biphasic, Mirror: B5</b>
         
-        Downard slope before 0.<br>
         
-        Left slightly above right.<br>
-        Could shift time scale to line them up; investigate ERP plot separately. (notes on journal)
+        Press: Has broader peak  <br>
+        Tap: not much L/R difference<br>
+           - Some difference right after 0 but synchronizes again
+        Slight L/R distinction overall<br>
+        
+        L/R mirror of B5? (although peaks higher)
         </div>
 
     <img id="cl11" src="../img/dip_ersp/ersp11.png" />
-    <div class = 'textbox' id = 'div11' style = "display: none;"><b>B11: TP+ (time and amp), LR-, large trough, high oscillation, Mirror: B4</b><br>
-        P/T difference, especially @ t=0.<br>
+    <div class = 'textbox' id = 'div11' style = "display: none;"><b>**B11: PT+ (amp and time) LR+ (amp L>>R;mostly for tap), Big Peak</b><br>
+        ☆ Noted as interesting.  ERP seems to prefer Left.<br><br>
         
-        Left slightly above right especially for tap.<br>
-        Would be useful to use same vertical scale for all plots (to compare w/ B4's ERP).<br>
+        All of press peaks but only tap left peaks.<br><br>
         
-        Dipoles mirror B4.
+        Warning: low IC count
         </div>
 
     <img id="cl12" src="../img/dip_ersp/ersp12.png" />
-    <div class = 'textbox' id = 'div12' style = "display: none;"><b>B12: TP+ (time and amp) LR+ (amp;only for press), big trough</b><br>
+    <div class = 'textbox' id = 'div12' style = "display: none;"> <b>B12: TP+ (time and amp |P| > |T|) LR- Biphasic</b> <br> 
+        ERP: Biphasic (negative/positive). Press: has a larger negative trough before tap; 
+        Tap: smaller initial negative, not preceding tap, shifted later in time (but this pattern appears often and may be due to tap/press parameters). <br>
+        
+        Downward slope before 0.
+        </div>
+
+    <img id="cl13" src="../img/dip_ersp/ersp13.png" />
+    <div class = 'textbox' id = 'div13' style = "display: none;"><b>B13: TP+ (time and amp) LR+ (amp;only for press), big trough</b><br>
 
         TP difference unless latency shift: press before tap, but also deeper troughs.<br>
         - Press left has earlier, stronger response<br><br>
@@ -205,23 +239,14 @@
         dipole plot could indicate contralateral inhibition, possibly beta desync?
         </div>
 
-    <img id="cl13" src="../img/dip_ersp/ersp13.png" />
-    <div class = 'textbox' id = 'div13' style = "display: none;"><b>**B13: PT+ (amp and time) LR+ (amp L>>R;mostly for tap), Big Peak</b><br>
-        ☆ Noted as interesting.  ERP seems to prefer Left.<br><br>
-        
-        All of press peaks but only tap left peaks.<br><br>
-        
-        Warning: low IC count
-        </div>
-
     <img id="cl14" src="../img/dip_ersp/ersp14.png" />
-    <div class = 'textbox' id = 'div14' style = "display: none;"><b>B14: PT+ (time) LR + (amp |L| >>> |R|), biphasic</b><br>
-        Left preference (troughs first, but before t=0 which is interesting).<br><br>
+    <div class = 'textbox' id = 'div14' style = "display: none;"><b>B14: TP+ (amp and time(?)) LR+ (For tap, in time pre t=0, then amp), multiphasic/chaotic (peak trough peak for tap)</b><br>
+
+        Tap left before TR around 0.  Also Tap's strong activity before 0 is interesting.<br>
         
-        Tap left slightly above at ~100ms<br>
-        Most of press left before peak press occurs.<br><br>
-        
-        Ziyi's not similar
+        Mostly T/P difference, where tap peaks first (while p troughs). (polarity inversion); amp inverted <br>
+        Left slightly above right after t=0<br>
+        Tap left also peaks slightly before tap right before t=0
         
         </div>
 
@@ -242,13 +267,13 @@
 
         var dataset = {
               "nodes": [
-              { "cluster": "4", "x" : 815, "y": 2148},
-              { "cluster": "5", "x":1530, "y": 1670},
-              { "cluster": "6", "x":900, "y": 1519},
-              { "cluster": "8", "x":2050, "y": 1507},
-              { "cluster": "11", "x":1830, "y": 2140},
-              { "cluster": "9", "x":932, "y": 730},
-              { "cluster": "14", "x":1594, "y": 621}
+              { "cluster": "4", "x" : 925, "y": 1320},
+              { "cluster": "5", "x":1520, "y": 1564},
+              { "cluster": "6", "x":1760, "y": 671},
+              { "cluster": "8", "x":1798, "y": 909},
+              { "cluster": "11", "x":923, "y": 919},
+              { "cluster": "9", "x":2884, "y": 1120},
+              { "cluster": "14", "x":2392, "y": 1386}
               ],
               "edges": [
               { "source": "4", "target": "11", "color" : "#5eeb34" },

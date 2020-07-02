@@ -7,6 +7,19 @@
    
 </head>
 <style>
+    a {
+        font-family: 'Verdana', Geneva, sans-serif;
+        font-size:50px;
+        color: white;
+        padding: 0px 25px;
+    }
+
+    .nav {
+        position: absolute;
+        width: 4000px;
+        z-index: 99;
+    }
+
     .body {
         position: absolute;
     }
@@ -21,18 +34,17 @@
     object-fit: cover;
     height: 2750px; 
     display: block;
-    
     }
    
     #cl3 {
     position: absolute;
-    top: 1178px;
-    left: 1035px;
+    top: 1284px;
+    left: 1277px;
     }
     #cl4 {
     position: absolute;
-    top: 2075px;
-    left: 600px;
+    top: 1034px;
+    left: 530px;
     z-index: 1;
     }
     #cl5 {
@@ -43,50 +55,50 @@
     }
     #cl6 {
     position: absolute;
-    top: 1450px;
-    left: 700px;
+    top: 454px;
+    left: 995px;
     z-index: 1;
     }
     #cl7 {
     position: absolute;
-    top: 1950px;
-    left: 1000px;
+    top: 625px;
+    left: 1300px;
     }
     #cl8 {
     position: absolute;
-    top: 1425px;
-    left: 1800px;
+    top: 803px;
+    left: 2058px;
     }
     #cl9 {
     position: absolute;
-    top: 650px;
-    left: 550px;
+    top: 999px;
+    left: 1276px;
     }
     #cl10 {
     position: absolute;
-    top: 825px;
-    left: 550px;
+    top: 1895px;
+    left: 1160px;
     }
     #cl11 {
     position: absolute;
-    top: 2075px;
-    left: 1600px;
+    top: 1042px;
+    left: 2046px;
     z-index: 1;
     }
     #cl12 {
     position: absolute;
-    top: 1200px;
-    left: 450px;
+    top: 1321px;
+    left: 524px;
     }
     #cl13 {
     position: absolute;
-    top: 1890px;
-    left: 1650px;
+    top: 2002px;
+    left: 2126px;
     }
     #cl14 {
     position: absolute;
-    top: 546px;
-    left: 1343px;
+    top: 1237px;
+    left: 2123px;
     z-index: 1;
     }
 
@@ -102,6 +114,15 @@
 </style>
 
 <body class = "body" style="background-color:black;" >
+    <div class = "nav">
+        <a href = "horz_dip_only.html">Horizontal ERP</a>
+        <a href = "sag_dip_only.html">Sagittal ERP</a> 
+        <a href = "cor_dip_only.html">Coronal ERP</a>  <br>
+        <a href = "horz_dip_only_ersp.html">Horizontal ERSP</a>
+        <a href = "sag_dip_only_ersp.html">Sagittal ERSP</a> 
+        <a href = "cor_dip_only_ersp.html">Coronal ERSP</a> <br>
+        <a href = "../dip_ersp/horz_dip_ersp.html">[Switch clusterings]</a> <br>
+    </div>
     <!-- <svg id "graph"></svg> -->
 
 
@@ -242,13 +263,13 @@
 
         var dataset = {
               "nodes": [
-              { "cluster": "4", "x" : 815, "y": 2148},
+              { "cluster": "4", "x" : 940, "y": 1135},
               { "cluster": "5", "x":1530, "y": 1670},
-              { "cluster": "6", "x":900, "y": 1519},
-              { "cluster": "8", "x":2050, "y": 1507},
-              { "cluster": "11", "x":1830, "y": 2140},
-              { "cluster": "9", "x":932, "y": 730},
-              { "cluster": "14", "x":1594, "y": 621}
+              { "cluster": "6", "x":1200, "y": 533},
+              { "cluster": "8", "x":2298, "y": 879},
+              { "cluster": "11", "x":2281, "y": 1121},
+              { "cluster": "9", "x":1512, "y": 1046},
+              { "cluster": "14", "x":2337, "y": 1291}
               ],
               "edges": [
               { "source": "4", "target": "11", "color" : "#5eeb34" },
