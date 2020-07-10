@@ -1,6 +1,6 @@
 {
   "nodes": [
-    { "course": "COGS 118A", "name":"Introduction to Machine Learning", "description":"<b> Amazing class! <b> <br>Lorem ipsum dorset bla bla bla bla bla bla bla","type": "parent"}, 
+    { "course": "COGS 118A", "name":"Introduction to Machine Learning", "description":"This course introduces the mathematical formulations and algorithmic implementations of the core supervised machine learning methods. Topics in 118A include regression, nearest neighborhood, decision tree, support vector machine, and ensemble classifiers. COGS 118A-B may be taken in either order.","type": "parent"}, 
     { "course": "COGS 18", "name":"Intro to python","description":"","type": "child"}, 
     { "course": "CSE 8B", "name":"","description":"","type": "child"}, 
     { "course": "CSE 11", "name":"","description":"","type": "child"}, 
@@ -12,21 +12,27 @@
     { "course": "MATH 180A", "name":"Introduction to Probability","description":"Hard class!","type": "child"}, 
     { "course": "COGS 108", "name":"","description":"","type": "child"}, 
     { "course": "COGS 109", "name":"","description":"","type": "child"},
-    { "course": "other", "name":"consent of instructor","description":"", "type": "special"}
+    { "course": "other", "name":"consent of instructor","description":"", "type": "special"},
+    { "course": "COGS 14B", "name":" ","description":"", "type": "child"}
   ],
   
   "edges": [
-    { "source": "COGS 18", "target": "COGS 118A", "group" : 1},
-    { "source": "CSE 8B", "target": "COGS 118A", "group" : 1},
-    { "source": "CSE 11", "target": "COGS 118A", "group" : 1},
+    { "source": "COGS 18", "target": "COGS 108", "group" : 1},
+    { "source": "CSE 8B", "target": "COGS 108", "group" : 1},
+    { "source": "CSE 11", "target": "COGS 108", "group" : 1},
+    { "source": "COGS 18", "target": "COGS 109", "group" : 2},
+    { "source": "CSE 8B", "target": "COGS 109", "group" : 2},
+    { "source": "CSE 11", "target": "COGS 109", "group" : 2},
+    { "source": "COGS 14B", "target": "COGS 109", "group" : 0},
+    { "source": "MATH 18", "target": "COGS 109", "group" : 0},
     { "source": "MATH 20E", "target": "COGS 118A", "group" : 0},
     { "source": "MATH 20C", "target": "MATH 20E", "group" : 0},
     { "source": "MATH 20B", "target": "MATH 20C", "group" : 0},
     { "source": "MATH 20A", "target": "MATH 20B", "group" : 0},
     { "source": "MATH 20C", "target": "MATH 180A", "group" : 0},
     { "source": "MATH 18", "target": "MATH 20E", "group" : 0},
-    { "source": "COGS 108", "target": "COGS 118A", "group" : 2 },
-    { "source": "COGS 109", "target": "COGS 118A", "group" : 2 },
+    { "source": "COGS 108", "target": "COGS 118A", "group" : 3 },
+    { "source": "COGS 109", "target": "COGS 118A", "group" : 3 },
     { "source": "MATH 180A", "target": "COGS 118A", "group" : 0 },
     { "source": "other", "target": "COGS 118A", "group" : 0 }
   ]
