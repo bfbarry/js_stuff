@@ -1,0 +1,53 @@
+{% from "macros.html" import nav_link with context %}
+<!DOCTYPE html>
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+      .container {
+        max-width: 500px;
+        padding-top: 100px;
+      }
+      h2 {color: red;}
+      body {
+        padding-top: 100px;
+        padding-left: 100px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+      <form>
+        <label for="cars">Choose a car:</label>
+
+        <select id ='selection' name="cars" id="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+        
+        <div id = 'saab_case' style="margin:0 auto; display:none;">
+            <p id='YO'>Yoooo</p>
+            <input type="text" id="lname" name="lname"><br><br>    
+        </div>
+        <input type="submit" value="Submit">
+      </form>
+  </body>
+  <script type="text/javascript">
+      $(document).ready(function() {
+        $("#selection").change(function () {
+            var val = $(this).val();
+            if (val == "saab") {
+                console.log('SAAAAAAAAAAAAAB')
+                $("#saab_case").show();
+            }
+            else {
+                $("#saab_case").hide(); 
+            }
+        });
+    });
+
+  </script>
+

@@ -1,0 +1,144 @@
+<!doctype = HTML> 
+<head>
+    <style>
+        html {
+        height: 100%;
+        }
+        
+        body {
+        overflow: hidden;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 500px;
+        height: 500px;
+        }
+
+        .square {
+        margin: 0 auto;
+        transform: scale(0.4,0.4);
+        height: 500px;
+        }
+
+        .left {
+        width: 140px;
+        height: 500px;
+        transform: rotate(30deg);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        }
+
+        .left div {
+        transform: rotate(30deg) skew(30deg);
+        background: #006495;
+        width: 100%;
+        height: 500px;
+        }
+
+        .left div:after {
+        content: "";
+        background: #006495;
+        width: 330px;
+        height: 100px;
+        position: absolute;
+        right: -325px;
+        }
+
+        .top {
+        width: 140px;
+        height: 500px;
+        transform: rotate(0deg);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        }
+
+        .top div {
+        transform: rotate(0deg) skew(0deg);
+        background: red;
+        width: 100%;
+        height: 500px;
+        }
+
+        .top div:after {
+        content: "";
+        background: red;
+        width: 330px;
+        height: 100px;
+        position: absolute;
+        right: -325px;
+        }
+
+        .right {
+        width: 140px;
+        height: 500px;
+        transform: rotate(-30deg);
+        position: absolute;
+        left: 323px;
+        top: -60px;
+        z-index: 99;
+        }
+
+        .right div {
+        transform: rotate(30deg) skew(30deg);
+        background: #0093D1;
+        width: 100%;
+        height: 500px;
+        position: absolute;
+        right: 0;
+        }
+
+        .right div:after {
+        content: "";
+        background: #0093D1;
+        width: 322px;
+        height: 100px;
+        position: absolute;
+        right: 82px;
+        bottom: 0;
+        transform: skew(-49deg);
+        }
+
+        .bottom {
+        width: 140px;
+        height: 500px;
+        transform: rotate(90deg);
+        position: absolute;
+        left: 214px;
+        top: 250px;
+        }
+
+        .bottom div {
+        transform: rotate(30deg) skew(30deg);
+        background: #004C70;
+        width: 100%;
+        height: 500px;
+        position: absolute;
+        right: 0;
+        }
+
+        .bottom div:after {
+        content: "";
+        background: #004C70;
+        width: 462px;
+        height: 100px;
+        position: absolute;
+        right: 0;
+        top: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="square">
+        <div class="left"><div></div></div>
+        <div class="top"><div></div></div>
+        <div class="right"><div></div></div>
+        <div class="bottom"><div></div></div>
+    </div>
+</body>
