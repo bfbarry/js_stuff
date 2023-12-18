@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .maze_container {
+
+    }
+    .maze {
+      background-color: rgb(14, 10, 10);
+      transition: all 0.5s ease;
+      overflow: hidden;
+      position: relative;
+    }
+    .maze-row {
+      display: flex;
+      /* justify-content: center; */
+    }
+    .maze-cell {
+      height: 20px;
+      width: 20px;
+    }
+  </style>
+  <body>
+    <div id="maze_container">
+
+      <div id="maze" class="maze"></div>
+    </div>
+  </body>
+  <script type="application/javascript">
+    const LINE_LENGTH = 70;
+    const MAZE_HEIGHT = 10;
+    let maze = document.getElementById('maze');
+    const getRandInt = (max) => (Math.floor(Math.random() * max));
+    
+    const getRandMazeClass = () => {
+      const options = ["left", "right"];
+      return options[getRandInt(options.length)]
+    }
+
+    const addMazeRow = () => {
+      let maze_row = document.createElement('div');
+      maze_row.classList.add('maze-row');
+      for (let col_i=0; col_i<LINE_LENGTH; col_i++) {
+        let maze_cell = document.createElement('div')
+        maze_cell.classList.add('maze-cell');
+        let random_class_suffix = getRandMazeClass();
+        let line_img = document.createElement('img');
+        line_img.src = `./diag_${random_class_suffix}.svg`
+        maze_cell.appendChild(line_img)
+        maze_row.appendChild(maze_cell);
+      }
+      
+      maze.appendChild(maze_row);
+    }
+
+    for (let i=0; i<MAZE_HEIGHT; i++) {
+      addMazeRow(false)
+    }
+
+    let scrollAmount = 0;
+    const scrollIncrease = 2;
+    const interval = setInterval(() => {
+      addMazeRow()
+      scrollAmount += scrollIncrease;
+      maze.style.transform = `translateY(-${scrollAmount}px)`
+      let firstRow = maze.getElementsByClassName('maze-row')[0];
+      firstRow.style.height = '0';
+        firstRow.style.overflow = 'hidden';
+        firstRow.style.transition = 'height 0.5s ease';
+
+        // Use setTimeout to remove the first row after the transition
+        setTimeout(() => {
+            if (maze.contains(firstRow)) {
+                maze.removeChild(firstRow);
+            }
+        }, 500); // This should match the CSS transition duration
+      // maze.removeChild(firstRow)
+      // let x = document.createElement('div')
+      // firstRow.innerHTML = x;
+      // maze.appendChild(firstRow)
+      // setTimeout(() => {
+      //       scrollAmount -= firstRow.offsetHeight;
+      //   }, 500);
+    }, 500)
+        
+  </script>
+</html>
